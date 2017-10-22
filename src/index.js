@@ -38,7 +38,7 @@ class ReactCodepen extends Component {
   }
 
   render() {
-    if (!this.state.loaded || this.state.loading) {
+    if (!this.state.loaded && this.props.loader) {
       return React.createElement(this.props.loader, {
         isLoading: this.state.loading,
         error: this.state.error
@@ -57,7 +57,7 @@ class ReactCodepen extends Component {
           data-embed-version={this.props.version}
           data-pen-title={this.props.title}
           data-preview={this.props.preview}
-          class="codepen"
+          className="codepen"
         >
           See the Pen <a href={penLink}>{this.props.title}</a>
           by {this.props.user} (<a href={userProfileLink}>@{this.props.user}</a>) 
@@ -72,8 +72,7 @@ class ReactCodepen extends Component {
 
 ReactCodepen.defaultProps = {
   defaultTab: 'css,result',
-  height: 265,
-  loader: null,
+  height: 300,
   preview: true,
   themeId: 'dark',
   version: 2

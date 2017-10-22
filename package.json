@@ -8,7 +8,7 @@
   "description": "React component to embed codepen project",
   "main": "lib/index.js",
   "repository": {
-    "url": "",
+    "url": "https://github.com/shettypuneeth/react-codepen-embed",
     "type": "git"
   },
   "author": "Puneeth Shetty <puneeth102@gmail.com>",
