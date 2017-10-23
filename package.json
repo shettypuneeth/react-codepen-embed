@@ -4,7 +4,7 @@
     "react",
     "codepen"
   ],
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React component to embed codepen project",
   "main": "lib/index.js",
   "repository": {
