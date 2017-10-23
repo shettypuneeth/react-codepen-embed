@@ -82,7 +82,10 @@ ReactCodepen.propTypes = {
   defaultTab: PropTypes.string,
   hash: PropTypes.string.isRequired,
   height: PropTypes.number,
-  loader: PropTypes.element,
+  loader: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func
+  ]),
   preview: PropTypes.bool,
   title: PropTypes.string,
   themeId: PropTypes.oneOfType([
