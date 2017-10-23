@@ -26,3 +26,46 @@ const CodepenEmbedded = () => {
   );
 }
 ```
+
+## Component Props
+
+Property   | Type     | Required | Default     | Description                                                   |
+-----------|----------|----------|-------------|---------------------------------------------------------------|
+hash       | `string` | `true`   |             | Id of the pen to embed                                        |
+user       | `string` | `true`   |             | Codepen username                                              |
+height     | `string` | `false`  | `300`       | Height of the pen                                             | 
+loader     | `node`   | `false`  |             | Loader to render while the pen is being embedded or errors out| 
+defaultTab | `string` | `false`  | `css,result`| Default tab to display                                        | 
+themeId    | `string` | `false`  | `dark`      | Theme for the pen                                             |
+preview    | `boolean`| `false`  | `true`      | Make the preview "Click-to-Load"                              |
+title      | `string` | `false`  |             | Title of the pen                                              |
+
+
+## API
+
+#### `Props.loader`
+Compenent to render when the pen is being embedded or when it errors.
+
+```js
+<Codepen
+  hash="JyxeVP"
+  user="shettypuneeth"
+  loader={() => <div>Loading...</div>}
+/>
+```
+
+If the embed fails then the loader component will receive an error prop
+
+```js
+const Loading = (props) {
+  if (props.error) {
+    return (
+      <div>Error</div>
+    );
+  } else {
+    return (
+      <div>Loading...</div>
+    );
+  }
+}
+```
