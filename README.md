@@ -57,7 +57,7 @@ Compenent to render when the pen is being embedded or when it errors.
 If the embed fails then the loader component will receive an error prop
 
 ```js
-const Loading = (props) {
+const Loading = (props) => {
   if (props.error) {
     return (
       <div>Error</div>
