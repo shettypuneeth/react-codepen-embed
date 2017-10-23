@@ -33,8 +33,8 @@ Property   | Type     | Required | Default     | Description                    
 -----------|----------|----------|-------------|---------------------------------------------------------------|
 hash       | `string` | `true`   |             | Id of the pen to embed                                        |
 user       | `string` | `true`   |             | Codepen username                                              |
-height     | `string` | `false`  | `300`       | Height of the pen                                             | 
-loader     | `node`   | `false`  |             | Loader to render while the pen is being embedded or errors out| 
+height     | `number` | `false`  | `300`       | Height of the pen                                             | 
+loader     | `element`| `false`  |             | Loader to render while the pen is being embedded or errors out| 
 defaultTab | `string` | `false`  | `css,result`| Default tab to display                                        | 
 themeId    | `string` | `false`  | `dark`      | Theme for the pen                                             |
 preview    | `boolean`| `false`  | `true`      | Make the preview "Click-to-Load"                              |
