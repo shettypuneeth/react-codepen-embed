@@ -14,9 +14,9 @@ interface ReactCodepenProps {
     defaultTab: string,
     hash: string,
     height: number,
-    loader: FunctionComponent<LoaderProps> | ComponentClass<LoaderProps> | string,
+    loader?: FunctionComponent<LoaderProps> | ComponentClass<LoaderProps> | string,
     preview: boolean,
-    title: string,
+    title?: string,
     themeId: string | number,
     user: string,
     version: number
