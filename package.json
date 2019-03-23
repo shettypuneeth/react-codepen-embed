@@ -1,17 +1,18 @@
 {
-  "name": "react-codepen-embed",
+  "name": "responsive-react-codepen-embed",
   "keywords": [
     "react",
-    "codepen"
+    "codepen",
+    "typescript"
   ],
-  "version": "0.1.0",
-  "description": "React component to embed codepen project",
+  "version": "0.2.0",
+  "description": "React component to embed codepen project (with responsive height)",
   "main": "lib/index.js",
   "repository": {
-    "url": "https://github.com/shettypuneeth/react-codepen-embed",
+    "url": "https://github.com/htbkoo/react-codepen-embed",
     "type": "git"
   },
-  "author": "Puneeth Shetty <puneeth102@gmail.com>",
+  "author": "htbkoo",
   "license": "MIT",
   "scripts": {
     "test": "jest --coverage",
