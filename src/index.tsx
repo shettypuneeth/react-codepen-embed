@@ -104,12 +104,4 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
     }
 }
 
-ReactCodepen.defaultProps = {
-    defaultTab: 'css,result',
-    height: 300,
-    preview: true,
-    themeId: 'dark',
-    version: 2
-};
-
 export default ReactCodepen;
