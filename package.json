@@ -15,7 +15,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --coverage",
-    "build": "babel src -d lib --modules common",
+    "build": "tsc",
     "prepublish": "yarn build"
   },
   "dependencies": {
