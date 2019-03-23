@@ -19,7 +19,9 @@ interface ReactCodepenProps {
     title?: string,
     themeId: string | number,
     user: string,
-    version: number
+    version: number,
+    shouldLoadScript: boolean,
+    overrideAsLoaded?: boolean
 }
 
 interface ReactCodepenState {
@@ -35,7 +37,8 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
         height: 300,
         preview: true,
         themeId: 'dark',
-        version: 2
+        version: 2,
+        shouldLoadScript: true
     };
 
     state = {loaded: false, loading: true, error: undefined};
@@ -43,28 +46,30 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
     componentDidMount() {
         this._mounted = true;
 
-        // load the codepen embed script
-        const script = document.createElement('script');
-        script.src = SCRIPT_URL;
-        script.async = true;
-        script.onload = () => {
-            // do not do anything if the component is already unmounted.
-            if (!this._mounted) return;
+        if (this.props.shouldLoadScript) {
+            // load the codepen embed script
+            const script = document.createElement('script');
+            script.src = SCRIPT_URL;
+            script.async = true;
+            script.onload = () => {
+                // do not do anything if the component is already unmounted.
+                if (!this._mounted) return;
 
-            this.setState({
-                loaded: true,
-                loading: false
-            });
-        };
-        script.onerror = () => {
-            if (!this._mounted) return;
+                this.setState({
+                    loaded: true,
+                    loading: false
+                });
+            };
+            script.onerror = () => {
+                if (!this._mounted) return;
 
-            this.setState({
-                error: 'Failed to load the pen'
-            });
-        };
+                this.setState({
+                    error: 'Failed to load the pen'
+                });
+            };
 
-        document.body.appendChild(script);
+            document.body.appendChild(script);
+        }
     }
 
     componentWillUnmount() {
@@ -72,12 +77,12 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
     }
 
     render() {
-        if (!this.state.loaded && this.props.loader) {
+        if (!this.isLoaded() && this.props.loader) {
             return React.createElement(this.props.loader, {
                 isLoading: this.state.loading,
                 error: this.state.error
             });
-        } else if (this.state.loaded) {
+        } else if (this.isLoaded()) {
             const penLink = `https://codepen.io/${this.props.user}/pen/${this.props.hash}/`;
             const userProfileLink = `https://codepen.io/${this.props.user}`;
 
@@ -101,6 +106,10 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
         } else {
             return null;
         }
+    }
+
+    private isLoaded() {
+        return this.props.overrideAsLoaded || this.state.loaded;
     }
 }
 
