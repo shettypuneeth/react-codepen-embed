@@ -15,8 +15,8 @@
     "jsx": "react",
     "outDir": "lib"
   },
-  "files": [
-    "src/index.tsx"
+  "include":  [
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
