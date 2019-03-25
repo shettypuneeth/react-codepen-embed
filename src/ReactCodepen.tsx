@@ -47,26 +47,10 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
     constructor(props: ReactCodepenProps, context) {
         super(props, context);
 
-        this.isLoaded = this.isLoaded.bind(this);
-
         this.scriptTagBuilder = new CodepenEmbedScriptTagBuilder()
             .setAsync(true)
-            .withOnLoadHandler(() => {
-                // do not do anything if the component is already unmounted.
-                if (!this._mounted) return;
-
-                this.setState({
-                    loaded: true,
-                    loading: false
-                });
-            })
-            .withOnErrorHandler(() => {
-                if (!this._mounted) return;
-
-                this.setState({
-                    error: 'Failed to load the pen'
-                });
-            });
+            .withOnLoadHandler(this.handleScriptLoad.bind(this))
+            .withOnErrorHandler(this.handleScriptError.bind(this));
     }
 
     componentDidMount() {
@@ -116,6 +100,24 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
 
     private isLoaded() {
         return this.props.overrideAsLoaded || this.state.loaded;
+    }
+
+    private handleScriptLoad() {
+        // do not do anything if the component is already unmounted.
+        if (!this._mounted) return;
+
+        this.setState({
+            loaded: true,
+            loading: false
+        });
+    }
+
+    private handleScriptError() {
+        if (!this._mounted) return;
+
+        this.setState({
+            error: 'Failed to load the pen'
+        });
     }
 }
 
