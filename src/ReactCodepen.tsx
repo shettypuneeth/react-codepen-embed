@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Component, ComponentClass, FunctionComponent} from 'react';
-
-const SCRIPT_URL = 'https://production-assets.codepen.io/assets/embed/ei.js';
+import CodepenEmbedScriptTagBuilder, {ScriptTagBuilder} from "./CodepenEmbedScriptTagBuilder";
 
 type ErrorType = string;
 
@@ -32,6 +31,8 @@ interface ReactCodepenState {
 
 class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
     private _mounted: boolean;
+    private scriptTagBuilder: ScriptTagBuilder;
+
     static defaultProps = {
         defaultTab: 'css,result',
         height: 300,
@@ -43,15 +44,14 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
 
     state = {loaded: false, loading: true, error: undefined};
 
-    componentDidMount() {
-        this._mounted = true;
+    constructor(props: ReactCodepenProps, context) {
+        super(props, context);
 
-        if (this.props.shouldLoadScript) {
-            // load the codepen embed script
-            const script = document.createElement('script');
-            script.src = SCRIPT_URL;
-            script.async = true;
-            script.onload = () => {
+        this.isLoaded = this.isLoaded.bind(this);
+
+        this.scriptTagBuilder = new CodepenEmbedScriptTagBuilder()
+            .setAsync(true)
+            .withOnLoadHandler(() => {
                 // do not do anything if the component is already unmounted.
                 if (!this._mounted) return;
 
@@ -59,16 +59,22 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
                     loaded: true,
                     loading: false
                 });
-            };
-            script.onerror = () => {
+            })
+            .withOnErrorHandler(() => {
                 if (!this._mounted) return;
 
                 this.setState({
                     error: 'Failed to load the pen'
                 });
-            };
+            });
+    }
 
-            document.body.appendChild(script);
+    componentDidMount() {
+        this._mounted = true;
+
+        if (this.props.shouldLoadScript) {
+            // load the codepen embed script
+            this.scriptTagBuilder.appendTo(document.body);
         }
     }
 
