@@ -67,11 +67,7 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
     }
 
     render() {
-        if (!this.isLoaded() && this.props.loader) {
-            const loaderComponent = React.createElement(this.props.loader, {
-                isLoading: this.state.loading,
-                error: this.state.error
-            });
+        if (this.isLoaded() || this.props.loader) {
             return (
                 <div
                     data-height={this.props.height}
@@ -84,28 +80,7 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
                     data-preview={this.props.preview}
                     className="codepen"
                 >
-                    {loaderComponent}
-                </div>
-            );
-        } else if (this.isLoaded()) {
-            const penLink = `https://codepen.io/${this.props.user}/pen/${this.props.hash}/`;
-            const userProfileLink = `https://codepen.io/${this.props.user}`;
-
-            return (
-                <div
-                    data-height={this.props.height}
-                    data-theme-id={this.props.themeId}
-                    data-slug-hash={this.props.hash}
-                    data-default-tab={this.props.defaultTab}
-                    data-user={this.props.user}
-                    data-embed-version={this.props.version}
-                    data-pen-title={this.props.title}
-                    data-preview={this.props.preview}
-                    className="codepen"
-                >
-                    See the Pen <a href={penLink}>{this.props.title}</a>
-                    by {this.props.user} (<a href={userProfileLink}>@{this.props.user}</a>)
-                    on <a href="https://codepen.io">CodePen</a>.
+                    {this.getContent()}
                 </div>
             );
         } else {
@@ -133,6 +108,26 @@ class ReactCodepen extends Component<ReactCodepenProps, ReactCodepenState> {
         this.setState({
             error: 'Failed to load the pen'
         });
+    }
+
+    private getContent() {
+        if (this.isLoaded()) {
+            const penLink = `https://codepen.io/${this.props.user}/pen/${this.props.hash}/`;
+            const userProfileLink = `https://codepen.io/${this.props.user}`;
+
+            return (
+                <div>
+                    See the Pen <a href={penLink}>{this.props.title}</a>
+                    by {this.props.user} (<a href={userProfileLink}>@{this.props.user}</a>)
+                    on <a href="https://codepen.io">CodePen</a>.
+                </div>
+            );
+        } else {
+            return React.createElement(this.props.loader, {
+                isLoading: this.state.loading,
+                error: this.state.error
+            });
+        }
     }
 }
 
