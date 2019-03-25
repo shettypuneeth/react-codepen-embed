@@ -1,13 +1,13 @@
 {
-  "name": "responsive-react-codepen-embed",
+  "name": "ts-react-codepen-embed",
   "keywords": [
     "react",
     "codepen",
     "responsive",
     "typescript"
   ],
-  "version": "0.3.0",
-  "description": "React component to embed codepen project (with responsive height)",
+  "version": "0.3.1",
+  "description": "React component to embed codepen project, in typescript and with responsive height",
   "main": "lib/index.js",
   "repository": {
     "url": "https://github.com/htbkoo/react-codepen-embed",
@@ -20,9 +20,7 @@
     "build": "tsc",
     "prepublish": "yarn build"
   },
-  "dependencies": {
-    "prop-types": "^15.5.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
