@@ -9,7 +9,7 @@ This is a fork of [shettypuneeth/react-codepen-embed](https://github.com/shettyp
 However, I need the following few features as well so I had decided to work on top of the above:
 - [ ] Responsive Height for the embedded pens 
     - So that the height is proportional to the window width and, in my humble opinion, looks better
-- [ ] Embedding multiple pens without firing the Codepen scripts multiple times
+- [x] Allowing the embedding of multiple pens without firing the Codepen scripts multiple times
     - Otherwise some of the scripts would fail and refuse to render
 - [x] Migrate the source to [TypeScript](https://www.typescriptlang.org/) 
     - Personal preference but I think TypeScript rules :-)
@@ -40,16 +40,18 @@ const CodepenEmbedded = () => {
 
 ## Component Props
 
-| Property   | Type      | Required | Default      | Description                                                    |
-| ---------- | --------- | -------- | ------------ | -------------------------------------------------------------- |
-| hash       | `string`  | `true`   |              | Id of the pen to embed                                         |
-| user       | `string`  | `true`   |              | Codepen username                                               |
-| height     | `number`  | `false`  | `300`        | Height of the pen                                              |
-| loader     | `element` | `false`  |              | Loader to render while the pen is being embedded or errors out |
-| defaultTab | `string`  | `false`  | `css,result` | Default tab to display                                         |
-| themeId    | `string`  | `false`  | `dark`       | Theme for the pen                                              |
-| preview    | `boolean` | `false`  | `true`       | Make the preview "Click-to-Load"                               |
-| title      | `string`  | `false`  |              | Title of the pen                                               |
+| Property         | Type      | Required | Default      | Description                                                    |
+| ---------------- | --------- | -------- | ------------ | -------------------------------------------------------------- |
+| hash             | `string`  | `true`   |              | Id of the pen to embed                                         |
+| user             | `string`  | `true`   |              | Codepen username                                               |
+| height           | `number`  | `false`  | `300`        | Height of the pen                                              |
+| loader           | `element` | `false`  |              | Loader to render while the pen is being embedded or errors out |
+| defaultTab       | `string`  | `false`  | `css,result` | Default tab to display                                         |
+| themeId          | `string`  | `false`  | `dark`       | Theme for the pen                                              |
+| preview          | `boolean` | `false`  | `true`       | Make the preview "Click-to-Load"                               |
+| title            | `string`  | `false`  |              | Title of the pen                                               |
+| shouldLoadScript | `boolean` | `false`  | `true`       | To load the codepen embed script or not                        |
+| overrideAsLoaded | `boolean` | `false`  |              | To override the `loaded` state                                 |
 
 ## API
 
