@@ -1,4 +1,4 @@
-# responsive-react-codepen-embed
+# ts-react-codepen-embed
 
 React component for embedding pens from [`Codepen.io`](https://codepen.io), with responsive height and ability to embed multiple pens in the same page this time
 
