@@ -6,9 +6,12 @@
     "responsive",
     "typescript"
   ],
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "React component to embed codepen project, in typescript and with responsive height",
   "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "url": "https://github.com/htbkoo/react-codepen-embed",
     "type": "git"
