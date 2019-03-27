@@ -21,17 +21,17 @@ However, I need the following few features as well so I had decided to work on t
 
 ```bash
 #using npm cli
-npm install --save react-codepen-embed
+npm install --save ts-react-codepen-embed
 
 #using yarn
-yarn add react-codepen-embed
+yarn add ts-react-codepen-embed
 ```
 
 ## Usage
 
 ```javascript
 import React from "react";
-import Codepen from "react-codepen-embed";
+import Codepen from "ts-react-codepen-embed";
 
 const CodepenEmbedded = () => {
   return <Codepen hash="JyxeVP" user="shettypuneeth" />;
