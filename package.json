@@ -4,7 +4,7 @@
     "react",
     "codepen"
   ],
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "React component to embed codepen project",
   "main": "lib/index.js",
   "repository": {
@@ -29,11 +29,11 @@
     "babel-preset-react": "^6.24.1",
     "flow-bin": "^0.41.0",
     "jest": "^19.0.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "react-test-renderer": "^16.0.0"
   },
   "peerDependencies": {
-    "react": "*"
+    "react": "^16.8.0"
   }
 }

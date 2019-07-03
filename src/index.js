@@ -1,99 +1,99 @@
-import React, { Component } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const SCRIPT_URL = 'https://production-assets.codepen.io/assets/embed/ei.js';
+const LOAD_STATE = {
+  booting: '__booting__',
+  error: '__error__',
+  loading: '__loading__',
+  loaded: '__loaded__',
+};
 
-class ReactCodepen extends Component {
-  state = { loaded: false, loading: true };
+const ReactCodepen = props => {
+  const [loadState, setLoadState] = useState(LOAD_STATE.booting);
+  const [error, setError] = useState();
+  const _isMounted = useRef(false);
 
-  componentDidMount() {
-    this._mounted = true;
-
+  const loadScript = () => {
     // load the codepen embed script
     const script = document.createElement('script');
     script.src = SCRIPT_URL;
     script.async = 1;
     script.onload = () => {
       // do not do anything if the component is already unmounted.
-      if (!this._mounted) return;
-
-      this.setState({
-        loaded: true,
-        loading: false
-      });
-    }
+      if (!_isMounted.current) return;
+      setLoadState(LOAD_STATE.loaded);
+    };
     script.onerror = () => {
-      if (!this._mounted) return;
+      if (!_isMounted.current) return;
+      setLoadState(LOAD_STATE.error);
+      setError('Failed to load the pen');
+    };
 
-      this.setState({
-        error: 'Failed to load the pen'
-      });
-    }
-
+    setLoadState(LOAD_STATE.loading);
     document.body.appendChild(script);
-  }
+  };
 
-  componentWillUnmount() {
-    this._mounted = false;
-  }
+  useEffect(() => {
+    if (_isMounted.current === false) _isMounted.current = true;
 
-  render() {
-    if (!this.state.loaded && this.props.loader) {
-      return React.createElement(this.props.loader, {
-        isLoading: this.state.loading,
-        error: this.state.error
-      });
-    } else if (this.state.loaded) {
-      const penLink = `https://codepen.io/${this.props.user}/pen/${this.props.hash}/`;
-      const userProfileLink = `https://codepen.io/${this.props.user}`;
+    loadScript();
 
-      return (
-        <p 
-          data-height={this.props.height}
-          data-theme-id={this.props.themeId}
-          data-slug-hash={this.props.hash}
-          data-default-tab={this.props.defaultTab}
-          data-user={this.props.user}
-          data-embed-version={this.props.version}
-          data-pen-title={this.props.title}
-          data-preview={this.props.preview}
-          className="codepen"
-        >
-          See the Pen <a href={penLink}>{this.props.title}</a>
-          by {this.props.user} (<a href={userProfileLink}>@{this.props.user}</a>) 
-          on <a href="https://codepen.io">CodePen</a>.
-        </p>
-      );
-    } else {
-      return null;
-    }
-  }
-}
+    return () => (_isMounted.current = false);
+  }, []);
+
+  const showLoader =
+    loadState === LOAD_STATE.loading && props.loader !== undefined;
+  const visibility = loadState === LOAD_STATE.loaded ? 'visible' : 'hidden';
+  const penLink = `https://codepen.io/${props.user}/pen/${props.hash}/`;
+  const userProfileLink = `https://codepen.io/${props.user}`;
+  const styles = { visibility };
+
+  return (
+    <React.Fragment>
+      {showLoader &&
+        React.createElement(props.loader, {
+          isLoading: loadState === LOAD_STATE.loading,
+          error,
+        })}
+      <p
+        data-height={props.height}
+        data-theme-id={props.themeId}
+        data-slug-hash={props.hash}
+        data-default-tab={props.defaultTab}
+        data-user={props.user}
+        data-embed-version={props.version}
+        data-pen-title={props.title}
+        data-preview={props.preview}
+        className="codepen"
+        style={styles}
+      >
+        See the Pen <a href={penLink}>{props.title}</a>
+        by {props.user} (<a href={userProfileLink}>@{props.user}</a>) on{' '}
+        <a href="https://codepen.io">CodePen</a>.
+      </p>
+    </React.Fragment>
+  );
+};
 
 ReactCodepen.defaultProps = {
   defaultTab: 'css,result',
   height: 300,
   preview: true,
   themeId: 'dark',
-  version: 2
+  version: 2,
 };
 
 ReactCodepen.propTypes = {
   defaultTab: PropTypes.string,
   hash: PropTypes.string.isRequired,
   height: PropTypes.number,
-  loader: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func
-  ]),
+  loader: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   preview: PropTypes.bool,
   title: PropTypes.string,
-  themeId: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  themeId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   user: PropTypes.string.isRequired,
-  version: PropTypes.number
+  version: PropTypes.number,
 };
 
 export default ReactCodepen;
