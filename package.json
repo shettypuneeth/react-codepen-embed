@@ -6,7 +6,7 @@
   ],
   "version": "1.0.0",
   "description": "React component to embed codepen project",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "repository": {
     "url": "https://github.com/shettypuneeth/react-codepen-embed",
     "type": "git"
@@ -22,16 +22,12 @@
     "prop-types": "^15.5.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "flow-bin": "^0.41.0",
-    "jest": "^19.0.2",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-test-renderer": "^16.0.0"
+    "react-dom": "^16.8.0"
   },
   "peerDependencies": {
     "react": "^16.8.0"
