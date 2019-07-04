@@ -4,9 +4,9 @@
     "react",
     "codepen"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component to embed codepen project",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "repository": {
     "url": "https://github.com/shettypuneeth/react-codepen-embed",
     "type": "git"
@@ -15,7 +15,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --coverage",
-    "build": "babel src -d lib --modules common",
+    "build": "babel src --out-dir lib",
     "prepublish": "yarn build"
   },
   "dependencies": {
