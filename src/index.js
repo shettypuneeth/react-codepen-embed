@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const SCRIPT_URL = 'https://production-assets.codepen.io/assets/embed/ei.js';
+const SCRIPT_URL = 'https://static.codepen.io/assets/embed/ei.js'; // new embed
 const LOAD_STATE = {
   booting: '__booting__',
   error: '__error__',
