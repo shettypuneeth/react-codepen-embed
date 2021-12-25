@@ -65,6 +65,7 @@ const ReactCodepen = props => {
         data-embed-version={props.version}
         data-pen-title={props.title}
         data-preview={props.preview}
+        data-editable={props.editable}
         className="codepen"
         style={styles}
       >
@@ -80,6 +81,7 @@ ReactCodepen.defaultProps = {
   defaultTab: 'css,result',
   height: 300,
   preview: true,
+  editable: true,
   themeId: 'dark',
   version: 2,
 };
@@ -90,6 +92,7 @@ ReactCodepen.propTypes = {
   height: PropTypes.number,
   loader: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   preview: PropTypes.bool,
+  editable: PropTypes.bool,
   title: PropTypes.string,
   themeId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   user: PropTypes.string.isRequired,
