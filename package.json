@@ -31,5 +31,6 @@
   },
   "peerDependencies": {
     "react": "^16.8.0"
-  }
+  },
+  "types": "./index.d.ts"
 }
