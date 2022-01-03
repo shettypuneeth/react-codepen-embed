@@ -81,7 +81,7 @@ ReactCodepen.defaultProps = {
   defaultTab: 'css,result',
   height: 300,
   preview: true,
-  editable: true,
+  editable: false,
   themeId: 'dark',
   version: 2,
 };
