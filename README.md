@@ -34,6 +34,7 @@ const CodepenEmbedded = () => {
 | defaultTab | `string`  | `false`  | `css,result` | Default tab to display                                         |
 | themeId    | `string`  | `false`  | `dark`       | Theme for the pen                                              |
 | preview    | `boolean` | `false`  | `true`       | Make the preview "Click-to-Load"                               |
+| editable   | `boolean` | `false`  | `false`       | Can edit code                                                  |
 | title      | `string`  | `false`  |              | Title of the pen                                               |
 
 ## API
