@@ -30,6 +30,12 @@ declare module 'react-codepen-embed' {
     defaultTab?: string;
 
     /**
+     * Make code editable
+     * @default 'false'
+     */
+    editable?: boolean;
+
+    /**
      * Theme for the pen
      * @default 'dark'
      */
