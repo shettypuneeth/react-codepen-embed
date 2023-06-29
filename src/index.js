@@ -9,7 +9,18 @@ const LOAD_STATE = {
   loaded: '__loaded__',
 };
 
-const ReactCodepen = props => {
+const ReactCodepen = ({
+  defaultTab = 'css,result',
+  height = 300,
+  preview = true,
+  editable = false,
+  themeId = 'dark',
+  version = 2,
+  loader,
+  user,
+  hash,
+  title
+}) => {
   const [loadState, setLoadState] = useState(LOAD_STATE.booting);
   const [error, setError] = useState();
   const _isMounted = useRef(false);
@@ -43,48 +54,41 @@ const ReactCodepen = props => {
   }, []);
 
   const showLoader =
-    loadState === LOAD_STATE.loading && props.loader !== undefined;
+    loadState === LOAD_STATE.loading && loader !== undefined;
   const visibility = loadState === LOAD_STATE.loaded ? 'visible' : 'hidden';
-  const penLink = `https://codepen.io/${props.user}/pen/${props.hash}/`;
-  const userProfileLink = `https://codepen.io/${props.user}`;
+  const penLink = `https://codepen.io/${user}/pen/${hash}/`;
+  const userProfileLink = `https://codepen.io/${user}`;
   const styles = { visibility };
 
   return (
     <React.Fragment>
       {showLoader &&
-        React.createElement(props.loader, {
+        React.createElement(loader, {
           isLoading: loadState === LOAD_STATE.loading,
           error,
         })}
       <p
-        data-height={props.height}
-        data-theme-id={props.themeId}
-        data-slug-hash={props.hash}
-        data-default-tab={props.defaultTab}
-        data-user={props.user}
-        data-embed-version={props.version}
-        data-pen-title={props.title}
-        data-preview={props.preview}
-        data-editable={props.editable}
+        data-height={height}
+        data-theme-id={themeId}
+        data-slug-hash={hash}
+        data-default-tab={defaultTab}
+        data-user={user}
+        data-embed-version={version}
+        data-pen-title={title}
+        data-preview={preview}
+        data-editable={editable}
         className="codepen"
         style={styles}
       >
-        See the Pen <a href={penLink}>{props.title}</a>
-        by {props.user} (<a href={userProfileLink}>@{props.user}</a>) on{' '}
+        See the Pen <a href={penLink}>{title}</a>
+        by {user} (<a href={userProfileLink}>@{user}</a>) on{' '}
         <a href="https://codepen.io">CodePen</a>.
       </p>
     </React.Fragment>
   );
 };
 
-ReactCodepen.defaultProps = {
-  defaultTab: 'css,result',
-  height: 300,
-  preview: true,
-  editable: false,
-  themeId: 'dark',
-  version: 2,
-};
+
 
 ReactCodepen.propTypes = {
   defaultTab: PropTypes.string,
