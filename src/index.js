@@ -19,7 +19,7 @@ const ReactCodepen = ({
   loader,
   user,
   hash,
-  title
+  title,
 }) => {
   const [loadState, setLoadState] = useState(LOAD_STATE.booting);
   const [error, setError] = useState();
@@ -53,8 +53,7 @@ const ReactCodepen = ({
     return () => (_isMounted.current = false);
   }, []);
 
-  const showLoader =
-    loadState === LOAD_STATE.loading && loader !== undefined;
+  const showLoader = loadState === LOAD_STATE.loading && loader !== undefined;
   const visibility = loadState === LOAD_STATE.loaded ? 'visible' : 'hidden';
   const penLink = `https://codepen.io/${user}/pen/${hash}/`;
   const userProfileLink = `https://codepen.io/${user}`;
@@ -87,8 +86,6 @@ const ReactCodepen = ({
     </React.Fragment>
   );
 };
-
-
 
 ReactCodepen.propTypes = {
   defaultTab: PropTypes.string,
